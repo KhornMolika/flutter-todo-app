@@ -12,19 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   // reference the hive box
   final _myBox = Hive.box('todoBox');
   ToDoDatabase db = ToDoDatabase();
 
   @override
   void initState() {
-
     // if this is the first time openning the app, then create default data
-    if (_myBox.get("TODOLIST") == null){
+    if (_myBox.get("TODOLIST") == null) {
       db.createInitialData();
-    }
-    else {
+    } else {
       db.loadData();
     }
 
@@ -67,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // delete task
-  void deleteTask(int index){
+  void deleteTask(int index) {
     setState(() {
       db.toDoList.removeAt(index);
     });
@@ -78,11 +75,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0), // optional: add some spacing
+          child: Image.asset(
+            'assets/icon/app_icon.png',
+            width: 32, // size of the icon
+            height: 32,
+            fit: BoxFit.contain,
+          ),
+        ),
         title: const Text(
           'TO DO',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        elevation: 0,
       ),
 
       backgroundColor: Colors.grey[100],
